@@ -1,8 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import json
-import asyncio
-import aiohttp
+import time
 #热搜api返回{序号:(热搜标题,内容,URL)}
 bilibiliHeaders={
     'accept': 'application/json, text/plain, */*',
@@ -76,15 +75,15 @@ def rednote():
     pass
 
 def bilibili():
-    url = "https://app.bilibili.com/x/v2/search/trending/ranking?csrf=69b789cf61b0755325ebca342a4e91d1&limit=30"
+    url = "https://app.bilibili.com/x/v2/search/trending/ranking?limit=30"
     payload = {}
     headers = bilibiliHeaders
 
     response = requests.request("GET", url, headers=headers, data=payload)
     tempDict=json.loads(response.text)
     listDict={}
-    for item in tempDict["data"]["list"]:
-        listDict[str(item["position"])]=item["show_name"]
+    listDict['时间戳']=round(time.time())
+    listDict['data']=[item['show_name'] for item in tempDict['data']['list']]
     return listDict
 
 def zhihu():#坏了!!!
@@ -166,6 +165,7 @@ async def bilibiliComment(oid):
 '''
 
 def bilibiliComment(oid):
+    #url=f"https://api.bilibili.com/x/v2/reply/wbi/main?type=1&oid={oid}&sort=1"
     url = f"https://api.bilibili.com/x/v2/reply?type=1&oid={oid}&sort=1"
     headers = bilibiliHeaders
     response = requests.request("GET", url, headers=headers)
@@ -174,3 +174,4 @@ def bilibiliComment(oid):
         return data
     except KeyError:
         return None
+
