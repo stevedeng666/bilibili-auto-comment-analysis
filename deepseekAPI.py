@@ -3,7 +3,7 @@ import json
 import process
 def analyze(data):
     data=str(process.comment2list(data))
-    client = OpenAI(api_key="sk-fea50baea3d54cd392b0ad21973097f3", base_url="https://api.deepseek.com")
+    client = OpenAI(api_key="自己设置", base_url="https://api.deepseek.com")
 
     response = client.chat.completions.create(
         model="deepseek-chat",
