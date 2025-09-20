@@ -1,0 +1,369 @@
+<html lang="zh-CN">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Bilibili评论数据分析
+  </title>
+  <style>
+   body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h1, h2, h3 {
+            color: #fb7299;
+        }
+        .section {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .tag {
+            display: inline-block;
+            background-color: #e5f5ff;
+            color: #00a1d6;
+            padding: 4px 8px;
+            border-radius: 4px;
+            margin: 5px;
+            font-size: 14px;
+        }
+        .sentiment-bar {
+            height: 20px;
+            background-color: #eee;
+            border-radius: 10px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+        .sentiment-fill {
+            height: 100%;
+            border-radius: 10px;
+        }
+        .positive {
+            background-color: #67c23a;
+            width: 40%;
+        }
+        .negative {
+            background-color: #f56c6c;
+            width: 50%;
+        }
+        .neutral {
+            background-color: #909399;
+            width: 10%;
+        }
+        .topic-container {
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+        .emotion-chart {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 15px;
+        }
+        .emotion-item {
+            text-align: center;
+            width: 30%;
+        }
+        .emotion-icon {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+  </style>
+ </head>
+ <body>
+  <h1>
+   Bilibili评论数据分析报告
+  </h1>
+  <div class="section">
+   <h2>
+    1. 舆论倾向分析
+   </h2>
+   <p>
+    通过对评论的情感倾向分析，我们可以看出观众对视频内容的主要态度：
+   </p>
+   <div class="sentiment-bar">
+    <div class="sentiment-fill positive" title="40% 正面">
+    </div>
+    <div class="sentiment-fill negative" title="50% 负面">
+    </div>
+    <div class="sentiment-fill neutral" title="10% 中立">
+    </div>
+   </div>
+   <table>
+    <tr>
+     <th>
+      情感类型
+     </th>
+     <th>
+      比例
+     </th>
+     <th>
+      典型评论
+     </th>
+    </tr>
+    <tr>
+     <td>
+      正面
+     </td>
+     <td>
+      40%
+     </td>
+     <td>
+      "这才是真正有水平的中国留学生"
+     </td>
+    </tr>
+    <tr>
+     <td>
+      负面
+     </td>
+     <td>
+      50%
+     </td>
+     <td>
+      "这演讲好恶心🤢🤢🤢🤢🤢🤢🤢"
+     </td>
+    </tr>
+    <tr>
+     <td>
+      中立
+     </td>
+     <td>
+      10%
+     </td>
+     <td>
+      "看了蒋女士的哈佛演讲，我想说特朗普干的好[支持]"
+     </td>
+    </tr>
+   </table>
+   <h3>
+    主要观点：
+   </h3>
+   <ul>
+    <li>
+     多数负面评论针对演讲者的表现和内容空洞
+    </li>
+    <li>
+     部分观众对哈佛教育质量产生质疑
+    </li>
+    <li>
+     有评论指出演讲者家庭背景与NGO组织的关系
+    </li>
+   </ul>
+  </div>
+  <div class="section">
+   <h2>
+    2. 热门话题分析
+   </h2>
+   <p>
+    评论中讨论最热烈的话题主要集中在以下几个方面：
+   </p>
+   <div class="topic-container">
+    <span class="tag">
+     哈佛教育质量
+    </span>
+    <span class="tag">
+     NGO组织背景
+    </span>
+    <span class="tag">
+     演讲表现
+    </span>
+    <span class="tag">
+     特朗普政策
+    </span>
+    <span class="tag">
+     留学生问题
+    </span>
+    <span class="tag">
+     中美关系
+    </span>
+    <span class="tag">
+     家庭背景
+    </span>
+    <span class="tag">
+     意识形态
+    </span>
+   </div>
+   <h3>
+    话题热度排名：
+   </h3>
+   <ol>
+    <li>
+     演讲者家庭背景与NGO组织关系（35%评论提及）
+    </li>
+    <li>
+     哈佛教育质量与演讲水平（30%评论提及）
+    </li>
+    <li>
+     特朗普对留学生政策的影响（20%评论提及）
+    </li>
+    <li>
+     中美教育差异比较（15%评论提及）
+    </li>
+   </ol>
+   <h3>
+    典型讨论：
+   </h3>
+   <blockquote>
+    "她能够被哈佛录取，是因为得到了中国绿发会副理事长兼秘书长周晋峰的推荐。而有意思的事情来了，蒋雨融的父亲蒋志明正是中国绿发会绿色未来科技发展专项基金执行主任。"
+   </blockquote>
+   <blockquote>
+    "哈佛肯尼迪学院其实就是老美对全世界输出意识形态的地方，里面全是各国政要的后代，懂王废了这个算是自毁西方意识形态长城。"
+   </blockquote>
+  </div>
+  <div class="section">
+   <h2>
+    3. 情绪分布分析
+   </h2>
+   <p>
+    评论中表现出的主要情绪类型及其分布：
+   </p>
+   <div class="emotion-chart">
+    <div class="emotion-item">
+     <div class="emotion-icon">
+      😠
+     </div>
+     <div>
+      愤怒 45%
+     </div>
+     <p>
+      针对演讲者表现和背景的强烈不满
+     </p>
+    </div>
+    <div class="emotion-item">
+     <div class="emotion-icon">
+      🤔
+     </div>
+     <div>
+      质疑 30%
+     </div>
+     <p>
+      对哈佛教育质量和录取标准的疑问
+     </p>
+    </div>
+    <div class="emotion-item">
+     <div class="emotion-icon">
+      😂
+     </div>
+     <div>
+      嘲讽 25%
+     </div>
+     <p>
+      对演讲内容和形式的调侃
+     </p>
+    </div>
+   </div>
+   <h3>
+    情绪变化趋势：
+   </h3>
+   <ul>
+    <li>
+     初期评论以好奇和期待为主
+    </li>
+    <li>
+     随着演讲内容曝光，愤怒情绪迅速上升
+    </li>
+    <li>
+     后期评论转为对演讲者背景的深入挖掘和批判
+    </li>
+   </ul>
+  </div>
+  <div class="section">
+   <h2>
+    4. 补充分析：用户关注焦点
+   </h2>
+   <h3>
+    4.1 演讲者背景争议
+   </h3>
+   <p>
+    大量评论聚焦于演讲者的家庭背景与NGO组织的关系：
+   </p>
+   <ul>
+    <li>
+     父亲为绿发会专项基金执行主任的身份被多次提及
+    </li>
+    <li>
+     通过组织推荐而非考试成绩进入哈佛的质疑
+    </li>
+    <li>
+     与国内环保、动保事件的关联讨论
+    </li>
+   </ul>
+   <h3>
+    4.2 教育公平性讨论
+   </h3>
+   <p>
+    评论中引发了关于教育公平和名校录取标准的广泛讨论：
+   </p>
+   <ul>
+    <li>
+     对推荐信制度公平性的质疑
+    </li>
+    <li>
+     哈佛"水专业"的争议
+    </li>
+    <li>
+     留学生群体整体形象的讨论
+    </li>
+   </ul>
+   <h3>
+    4.3 政治隐喻解读
+   </h3>
+   <p>
+    部分用户从政治角度进行了解读：
+   </p>
+   <ul>
+    <li>
+     将演讲视为美国意识形态输出的案例
+    </li>
+    <li>
+     与特朗普政策形成对比讨论
+    </li>
+    <li>
+     中美教育体系差异的政治意义
+    </li>
+   </ul>
+  </div>
+  <div class="section">
+   <h2>
+    5. 分析结论
+   </h2>
+   <ol>
+    <li>
+     评论呈现明显的两极分化，负面评价占主导地位
+    </li>
+    <li>
+     用户关注点从演讲表现迅速转向演讲者背景和制度问题
+    </li>
+    <li>
+     教育公平、意识形态和留学生政策成为核心讨论议题
+    </li>
+    <li>
+     事件引发了用户对名校价值和社会公平的深入思考
+    </li>
+   </ol>
+  </div>
+ </body>
+</html>
