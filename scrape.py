@@ -17,6 +17,7 @@ bilibiliHeaders={
     'sec-fetch-site': 'same-site',
     'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36 Edg/135.0.0.0'
     }
+bilibiliCookie="buvid3=01A897BA-2F34-DFCE-129C-648F1E4AD73409021infoc; b_nut=1740098609; _uuid=4D4B2542-B7F10-B78F-101F3-38D8B5DAD6F110152infoc; enable_web_push=DISABLE; buvid4=FE795F54-3EB5-75FE-AF65-FBB69976D19109972-025022100-BcL%2FiGDjV6q1kavXA8cQUk1KYiI4uwIEJWlGMCcXJZmQWcrOypImXRHgYZ8QvCuO; DedeUserID=171638608; DedeUserID__ckMd5=fb7076ae2a9b560b; rpdid=0zbfAGOKCP|12KGp1eWD|3c|3w1TLhaB; header_theme_version=CLOSE; buvid_fp_plain=undefined; hit-dyn-v2=1; LIVE_BUVID=AUTO7917406176336900; blackside_state=0; CURRENT_BLACKGAP=0; is-2022-channel=1; enable_feed_channel=ENABLE; go-old-space=-1; fingerprint=3f69fc24b0abd4a8c38d8e880b5978b8; buvid_fp=3f69fc24b0abd4a8c38d8e880b5978b8; home_feed_column=5; bili_ticket=eyJhbGciOiJIUzI1NiIsImtpZCI6InMwMyIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDkyOTgxMDAsImlhdCI6MTc0OTAzODg0MCwicGx0IjotMX0._qjIUQHlNqYTzy0ox3-YP7yHvBeN50eTu0X641LUSgI; bili_ticket_expires=1749298040; SESSDATA=d1e2bd9c%2C1764755531%2Cb3c82%2A61CjARTg7m2ekPpxREbtLGK5VPP_IBcdkC2fn767skFA5J9ghDDHavNtFrN7WjVLeboPMSVmpzNmotckFIa3g3VEpJU3hNWFllcnVZQVA0dVFtN1NLeEFlT21jREF0Wm1KMm1SOVk4d3Jab0xCM0VzZXBITW5BWlVUR3piMGJRUThpeG03d00za25BIIEC; bili_jct=c9139801ee370086c36092d4d3a5faf7; CURRENT_QUALITY=120; sid=8kvpocro; PVID=3; b_lsid=E55104671_197497EF783; bp_t_offset_171638608=1075671535626223616; browser_resolution=1504-754; CURRENT_FNVAL=4048"
 def baidu():
     url = "https://top.baidu.com/board?tab=realtime"
     payload = {}
@@ -164,10 +165,12 @@ async def bilibiliComment(oid):
     "content":{"message":正文}}]
 '''
 
+#我发现爬comment不带cookie的话就只返回三条结果，而且cookie要时不时更新，否则会失效
 def bilibiliComment(oid):
     #url=f"https://api.bilibili.com/x/v2/reply/wbi/main?type=1&oid={oid}&sort=1"
     url = f"https://api.bilibili.com/x/v2/reply?type=1&oid={oid}&sort=1"
     headers = bilibiliHeaders
+    headers["Cookie"]=bilibiliCookie
     response = requests.request("GET", url, headers=headers)
     try:
         data=response.json()['data']['replies']

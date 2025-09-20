@@ -1,0 +1,68 @@
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; color: #333; }
+        h2 { color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 5px; }
+        .section { margin-bottom: 25px; }
+        .positive { color: #27ae60; }
+        .negative { color: #e74c3c; }
+        .neutral { color: #f39c12; }
+        .topic { background-color: #f8f9fa; padding: 10px; border-radius: 5px; margin: 5px 0; }
+        .emotion-chart { display: flex; height: 30px; margin: 15px 0; }
+        .emotion-bar { display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="section">
+    <h2>舆论倾向分析</h2>
+    <p><span class="positive">正面评价：35%</span> - 主要来自认为题目简单或发挥较好的考生</p>
+    <p><span class="negative">负面评价：45%</span> - 普遍反映大题难度高、计算量大</p>
+    <p><span class="neutral">中性评价：20%</span> - 包括建议不要对答案、保持心态等评论</p>
+</div>
+
+<div class="section">
+    <h2>热门话题</h2>
+    <div class="topic">1. 计算量问题："一卷出题人look my eyes[微笑]这个计算量真的合理吗？"</div>
+    <div class="topic">2. 中等生困境："世界不需要中等生了吗？我真的服了"</div>
+    <div class="topic">3. 独立性检验题争议："算出来700多[藏狐]"</div>
+    <div class="topic">4. 与2022年难度对比："没有22届难的一律算简单😡"</div>
+    <div class="topic">5. 考试策略讨论："孩子们别对答案好吗，当年我对完答案心态崩了"</div>
+</div>
+
+<div class="section">
+    <h2>情绪分布</h2>
+    <div style="width: 100%">
+        <div class="emotion-chart">
+            <div class="emotion-bar" style="width: 25%; background-color: #e74c3c;">愤怒/焦虑 25%</div>
+            <div class="emotion-bar" style="width: 20%; background-color: #3498db;">幽默/调侃 20%</div>
+            <div class="emotion-bar" style="width: 15%; background-color: #2ecc71;">积极/自信 15%</div>
+            <div class="emotion-bar" style="width: 30%; background-color: #f39c12;">无奈/抱怨 30%</div>
+            <div class="emotion-bar" style="width: 10%; background-color: #9b59b6;">其他 10%</div>
+        </div>
+    </div>
+</div>
+
+<div class="section">
+    <h2>补充分析：考生类型分布</h2>
+    <ul>
+        <li>2024届考生：45% - 当前应考群体，讨论最热烈</li>
+        <li>2025届考生：25% - 对未来考试的担忧</li>
+        <li>2022届考生：15% - 与当年难度对比</li>
+        <li>大学生：10% - 以过来人身份评论</li>
+        <li>其他：5% - 包括家长、教师等</li>
+    </ul>
+</div>
+
+<div class="section">
+    <h2>典型评论摘录</h2>
+    <blockquote>"数学把我从考场送到工厂，太好了[打call]"</blockquote>
+    <blockquote>"前面1+1，后面造飞机[大哭][大哭][大哭]"</blockquote>
+    <blockquote>"算出这答案来我都不自信了"</blockquote>
+</div>
+
+</body>
+</html>
+```

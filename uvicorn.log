@@ -1,0 +1,1066 @@
+INFO:     Will watch for changes in these directories: ['/Users/steveheydrich/Desktop/代码Codes/热搜聚合与分析']
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [24658] using WatchFiles
+INFO:     Started server process [24660]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     127.0.0.1:57090 - "GET /getTrendingPlot HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/uvicorn/protocols/http/httptools_impl.py", line 409, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/middleware/errors.py", line 187, in __call__
+    raise exc
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/routing.py", line 714, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/routing.py", line 734, in app
+    await route.handle(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/routing.py", line 73, in app
+    response = await f(request)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/fastapi/routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/fastapi/routing.py", line 214, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/concurrency.py", line 37, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/anyio/to_thread.py", line 56, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/anyio/_backends/_asyncio.py", line 2470, in run_sync_in_worker_thread
+    return await future
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/anyio/_backends/_asyncio.py", line 967, in run
+    result = context.run(func, *args)
+  File "/Users/steveheydrich/Desktop/代码Codes/热搜聚合与分析/main.py", line 127, in plotTrending
+    fig=TimeSerise.getTrendingPlot(speed)
+  File "/Users/steveheydrich/Desktop/代码Codes/热搜聚合与分析/TimeSerise.py", line 16, in getTrendingPlot
+    df['timestamp']=pd.to_datetime(df.timestamp.map(time.ctime))
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/pandas/core/tools/datetimes.py", line 1067, in to_datetime
+    values = convert_listlike(arg._values, format)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/pandas/core/tools/datetimes.py", line 433, in _convert_listlike_datetimes
+    return _array_strptime_with_fallback(arg, name, utc, format, exact, errors)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/pandas/core/tools/datetimes.py", line 467, in _array_strptime_with_fallback
+    result, tz_out = array_strptime(arg, fmt, exact=exact, errors=errors, utc=utc)
+  File "strptime.pyx", line 501, in pandas._libs.tslibs.strptime.array_strptime
+  File "strptime.pyx", line 451, in pandas._libs.tslibs.strptime.array_strptime
+  File "strptime.pyx", line 583, in pandas._libs.tslibs.strptime._parse_with_format
+ValueError: time data "Sun Jun  1 18:00:01 2025" doesn't match format "%a %B %d %H:%M:%S %Y", at position 754. You might want to try:
+    - passing `format` if your strings have a consistent format;
+    - passing `format='ISO8601'` if your strings are all ISO8601 but not necessarily in exactly the same format;
+    - passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.
+INFO:     127.0.0.1:57091 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57165 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57709 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57931 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58082 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58089 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58106 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58113 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58122 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58129 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58159 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58315 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58893 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59071 - "GET / HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/util/connection.py", line 60, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+  File "/opt/anaconda3/envs/DA/lib/python3.10/socket.py", line 967, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/connectionpool.py", line 488, in _make_request
+    raise new_e
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/connectionpool.py", line 464, in _make_request
+    self._validate_conn(conn)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/connectionpool.py", line 1093, in _validate_conn
+    conn.connect()
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/connection.py", line 704, in connect
+    self.sock = sock = self._new_conn()
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/connection.py", line 205, in _new_conn
+    raise NameResolutionError(self.host, self, e) from e
+urllib3.exceptions.NameResolutionError: <urllib3.connection.HTTPSConnection object at 0x314871330>: Failed to resolve 'app.bilibili.com' ([Errno 8] nodename nor servname provided, or not known)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/requests/adapters.py", line 667, in send
+    resp = conn.urlopen(
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/util/retry.py", line 519, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='app.bilibili.com', port=443): Max retries exceeded with url: /x/v2/search/trending/ranking?limit=30 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x314871330>: Failed to resolve 'app.bilibili.com' ([Errno 8] nodename nor servname provided, or not known)"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/uvicorn/protocols/http/httptools_impl.py", line 409, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/middleware/errors.py", line 187, in __call__
+    raise exc
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/routing.py", line 714, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/routing.py", line 734, in app
+    await route.handle(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/routing.py", line 73, in app
+    response = await f(request)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/fastapi/routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/fastapi/routing.py", line 214, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/concurrency.py", line 37, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/anyio/to_thread.py", line 56, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/anyio/_backends/_asyncio.py", line 2470, in run_sync_in_worker_thread
+    return await future
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/anyio/_backends/_asyncio.py", line 967, in run
+    result = context.run(func, *args)
+  File "/Users/steveheydrich/Desktop/代码Codes/热搜聚合与分析/main.py", line 23, in read_root
+    return bilibili()
+  File "/Users/steveheydrich/Desktop/代码Codes/热搜聚合与分析/scrape.py", line 83, in bilibili
+    response = requests.request("GET", url, headers=headers, data=payload)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/requests/adapters.py", line 700, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='app.bilibili.com', port=443): Max retries exceeded with url: /x/v2/search/trending/ranking?limit=30 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x314871330>: Failed to resolve 'app.bilibili.com' ([Errno 8] nodename nor servname provided, or not known)"))
+INFO:     127.0.0.1:59077 - "GET / HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/util/connection.py", line 60, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+  File "/opt/anaconda3/envs/DA/lib/python3.10/socket.py", line 967, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/connectionpool.py", line 488, in _make_request
+    raise new_e
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/connectionpool.py", line 464, in _make_request
+    self._validate_conn(conn)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/connectionpool.py", line 1093, in _validate_conn
+    conn.connect()
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/connection.py", line 704, in connect
+    self.sock = sock = self._new_conn()
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/connection.py", line 205, in _new_conn
+    raise NameResolutionError(self.host, self, e) from e
+urllib3.exceptions.NameResolutionError: <urllib3.connection.HTTPSConnection object at 0x314872320>: Failed to resolve 'app.bilibili.com' ([Errno 8] nodename nor servname provided, or not known)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/requests/adapters.py", line 667, in send
+    resp = conn.urlopen(
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/util/retry.py", line 519, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='app.bilibili.com', port=443): Max retries exceeded with url: /x/v2/search/trending/ranking?limit=30 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x314872320>: Failed to resolve 'app.bilibili.com' ([Errno 8] nodename nor servname provided, or not known)"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/uvicorn/protocols/http/httptools_impl.py", line 409, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/middleware/errors.py", line 187, in __call__
+    raise exc
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/routing.py", line 714, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/routing.py", line 734, in app
+    await route.handle(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/routing.py", line 73, in app
+    response = await f(request)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/fastapi/routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/fastapi/routing.py", line 214, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/concurrency.py", line 37, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/anyio/to_thread.py", line 56, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/anyio/_backends/_asyncio.py", line 2470, in run_sync_in_worker_thread
+    return await future
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/anyio/_backends/_asyncio.py", line 967, in run
+    result = context.run(func, *args)
+  File "/Users/steveheydrich/Desktop/代码Codes/热搜聚合与分析/main.py", line 23, in read_root
+    return bilibili()
+  File "/Users/steveheydrich/Desktop/代码Codes/热搜聚合与分析/scrape.py", line 83, in bilibili
+    response = requests.request("GET", url, headers=headers, data=payload)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/requests/adapters.py", line 700, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='app.bilibili.com', port=443): Max retries exceeded with url: /x/v2/search/trending/ranking?limit=30 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x314872320>: Failed to resolve 'app.bilibili.com' ([Errno 8] nodename nor servname provided, or not known)"))
+INFO:     127.0.0.1:59517 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60044 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60470 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60751 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61184 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61553 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61885 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62822 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63628 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64346 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64667 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65228 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49249 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49729 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49904 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50217 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50442 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50779 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51216 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51594 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51720 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52214 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52393 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52634 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52779 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52844 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52957 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53202 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54270 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54820 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55239 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55516 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56160 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56485 - "GET / HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+urllib3.exceptions.SSLError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1007)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/requests/adapters.py", line 667, in send
+    resp = conn.urlopen(
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/util/retry.py", line 519, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='app.bilibili.com', port=443): Max retries exceeded with url: /x/v2/search/trending/ranking?limit=30 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1007)')))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/uvicorn/protocols/http/httptools_impl.py", line 409, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/middleware/errors.py", line 187, in __call__
+    raise exc
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/routing.py", line 714, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/routing.py", line 734, in app
+    await route.handle(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/routing.py", line 73, in app
+    response = await f(request)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/fastapi/routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/fastapi/routing.py", line 214, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/concurrency.py", line 37, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/anyio/to_thread.py", line 56, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/anyio/_backends/_asyncio.py", line 2470, in run_sync_in_worker_thread
+    return await future
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/anyio/_backends/_asyncio.py", line 967, in run
+    result = context.run(func, *args)
+  File "/Users/steveheydrich/Desktop/代码Codes/热搜聚合与分析/main.py", line 23, in read_root
+    return bilibili()
+  File "/Users/steveheydrich/Desktop/代码Codes/热搜聚合与分析/scrape.py", line 83, in bilibili
+    response = requests.request("GET", url, headers=headers, data=payload)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/requests/adapters.py", line 698, in send
+    raise SSLError(e, request=request)
+requests.exceptions.SSLError: HTTPSConnectionPool(host='app.bilibili.com', port=443): Max retries exceeded with url: /x/v2/search/trending/ranking?limit=30 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1007)')))
+INFO:     127.0.0.1:59343 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62227 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64794 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51057 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53921 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56536 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59136 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62060 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64993 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51500 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54308 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57437 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58078 - "GET / HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/util/connection.py", line 60, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+  File "/opt/anaconda3/envs/DA/lib/python3.10/socket.py", line 967, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/connectionpool.py", line 488, in _make_request
+    raise new_e
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/connectionpool.py", line 464, in _make_request
+    self._validate_conn(conn)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/connectionpool.py", line 1093, in _validate_conn
+    conn.connect()
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/connection.py", line 704, in connect
+    self.sock = sock = self._new_conn()
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/connection.py", line 205, in _new_conn
+    raise NameResolutionError(self.host, self, e) from e
+urllib3.exceptions.NameResolutionError: <urllib3.connection.HTTPSConnection object at 0x314871270>: Failed to resolve 'app.bilibili.com' ([Errno 8] nodename nor servname provided, or not known)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/requests/adapters.py", line 667, in send
+    resp = conn.urlopen(
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/util/retry.py", line 519, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='app.bilibili.com', port=443): Max retries exceeded with url: /x/v2/search/trending/ranking?limit=30 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x314871270>: Failed to resolve 'app.bilibili.com' ([Errno 8] nodename nor servname provided, or not known)"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/uvicorn/protocols/http/httptools_impl.py", line 409, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/middleware/errors.py", line 187, in __call__
+    raise exc
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/routing.py", line 714, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/routing.py", line 734, in app
+    await route.handle(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/routing.py", line 73, in app
+    response = await f(request)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/fastapi/routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/fastapi/routing.py", line 214, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/concurrency.py", line 37, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/anyio/to_thread.py", line 56, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/anyio/_backends/_asyncio.py", line 2470, in run_sync_in_worker_thread
+    return await future
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/anyio/_backends/_asyncio.py", line 967, in run
+    result = context.run(func, *args)
+  File "/Users/steveheydrich/Desktop/代码Codes/热搜聚合与分析/main.py", line 23, in read_root
+    return bilibili()
+  File "/Users/steveheydrich/Desktop/代码Codes/热搜聚合与分析/scrape.py", line 83, in bilibili
+    response = requests.request("GET", url, headers=headers, data=payload)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/requests/adapters.py", line 700, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='app.bilibili.com', port=443): Max retries exceeded with url: /x/v2/search/trending/ranking?limit=30 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x314871270>: Failed to resolve 'app.bilibili.com' ([Errno 8] nodename nor servname provided, or not known)"))
+INFO:     127.0.0.1:59039 - "GET / HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/util/connection.py", line 60, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+  File "/opt/anaconda3/envs/DA/lib/python3.10/socket.py", line 967, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/connectionpool.py", line 488, in _make_request
+    raise new_e
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/connectionpool.py", line 464, in _make_request
+    self._validate_conn(conn)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/connectionpool.py", line 1093, in _validate_conn
+    conn.connect()
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/connection.py", line 704, in connect
+    self.sock = sock = self._new_conn()
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/connection.py", line 205, in _new_conn
+    raise NameResolutionError(self.host, self, e) from e
+urllib3.exceptions.NameResolutionError: <urllib3.connection.HTTPSConnection object at 0x3148703d0>: Failed to resolve 'app.bilibili.com' ([Errno 8] nodename nor servname provided, or not known)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/requests/adapters.py", line 667, in send
+    resp = conn.urlopen(
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/util/retry.py", line 519, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='app.bilibili.com', port=443): Max retries exceeded with url: /x/v2/search/trending/ranking?limit=30 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x3148703d0>: Failed to resolve 'app.bilibili.com' ([Errno 8] nodename nor servname provided, or not known)"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/uvicorn/protocols/http/httptools_impl.py", line 409, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/middleware/errors.py", line 187, in __call__
+    raise exc
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/routing.py", line 714, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/routing.py", line 734, in app
+    await route.handle(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/routing.py", line 73, in app
+    response = await f(request)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/fastapi/routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/fastapi/routing.py", line 214, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/concurrency.py", line 37, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/anyio/to_thread.py", line 56, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/anyio/_backends/_asyncio.py", line 2470, in run_sync_in_worker_thread
+    return await future
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/anyio/_backends/_asyncio.py", line 967, in run
+    result = context.run(func, *args)
+  File "/Users/steveheydrich/Desktop/代码Codes/热搜聚合与分析/main.py", line 23, in read_root
+    return bilibili()
+  File "/Users/steveheydrich/Desktop/代码Codes/热搜聚合与分析/scrape.py", line 83, in bilibili
+    response = requests.request("GET", url, headers=headers, data=payload)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/requests/adapters.py", line 700, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='app.bilibili.com', port=443): Max retries exceeded with url: /x/v2/search/trending/ranking?limit=30 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x3148703d0>: Failed to resolve 'app.bilibili.com' ([Errno 8] nodename nor servname provided, or not known)"))
+INFO:     127.0.0.1:59811 - "GET / HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/util/connection.py", line 60, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+  File "/opt/anaconda3/envs/DA/lib/python3.10/socket.py", line 967, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/connectionpool.py", line 488, in _make_request
+    raise new_e
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/connectionpool.py", line 464, in _make_request
+    self._validate_conn(conn)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/connectionpool.py", line 1093, in _validate_conn
+    conn.connect()
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/connection.py", line 704, in connect
+    self.sock = sock = self._new_conn()
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/connection.py", line 205, in _new_conn
+    raise NameResolutionError(self.host, self, e) from e
+urllib3.exceptions.NameResolutionError: <urllib3.connection.HTTPSConnection object at 0x314870c70>: Failed to resolve 'app.bilibili.com' ([Errno 8] nodename nor servname provided, or not known)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/requests/adapters.py", line 667, in send
+    resp = conn.urlopen(
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/util/retry.py", line 519, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='app.bilibili.com', port=443): Max retries exceeded with url: /x/v2/search/trending/ranking?limit=30 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x314870c70>: Failed to resolve 'app.bilibili.com' ([Errno 8] nodename nor servname provided, or not known)"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/uvicorn/protocols/http/httptools_impl.py", line 409, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/middleware/errors.py", line 187, in __call__
+    raise exc
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/routing.py", line 714, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/routing.py", line 734, in app
+    await route.handle(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/routing.py", line 73, in app
+    response = await f(request)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/fastapi/routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/fastapi/routing.py", line 214, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/concurrency.py", line 37, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/anyio/to_thread.py", line 56, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/anyio/_backends/_asyncio.py", line 2470, in run_sync_in_worker_thread
+    return await future
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/anyio/_backends/_asyncio.py", line 967, in run
+    result = context.run(func, *args)
+  File "/Users/steveheydrich/Desktop/代码Codes/热搜聚合与分析/main.py", line 23, in read_root
+    return bilibili()
+  File "/Users/steveheydrich/Desktop/代码Codes/热搜聚合与分析/scrape.py", line 83, in bilibili
+    response = requests.request("GET", url, headers=headers, data=payload)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/requests/adapters.py", line 700, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='app.bilibili.com', port=443): Max retries exceeded with url: /x/v2/search/trending/ranking?limit=30 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x314870c70>: Failed to resolve 'app.bilibili.com' ([Errno 8] nodename nor servname provided, or not known)"))
+INFO:     127.0.0.1:60432 - "GET / HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/util/connection.py", line 60, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+  File "/opt/anaconda3/envs/DA/lib/python3.10/socket.py", line 967, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/connectionpool.py", line 488, in _make_request
+    raise new_e
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/connectionpool.py", line 464, in _make_request
+    self._validate_conn(conn)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/connectionpool.py", line 1093, in _validate_conn
+    conn.connect()
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/connection.py", line 704, in connect
+    self.sock = sock = self._new_conn()
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/connection.py", line 205, in _new_conn
+    raise NameResolutionError(self.host, self, e) from e
+urllib3.exceptions.NameResolutionError: <urllib3.connection.HTTPSConnection object at 0x31467b820>: Failed to resolve 'app.bilibili.com' ([Errno 8] nodename nor servname provided, or not known)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/requests/adapters.py", line 667, in send
+    resp = conn.urlopen(
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/util/retry.py", line 519, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='app.bilibili.com', port=443): Max retries exceeded with url: /x/v2/search/trending/ranking?limit=30 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x31467b820>: Failed to resolve 'app.bilibili.com' ([Errno 8] nodename nor servname provided, or not known)"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/uvicorn/protocols/http/httptools_impl.py", line 409, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/middleware/errors.py", line 187, in __call__
+    raise exc
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/routing.py", line 714, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/routing.py", line 734, in app
+    await route.handle(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/routing.py", line 73, in app
+    response = await f(request)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/fastapi/routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/fastapi/routing.py", line 214, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/concurrency.py", line 37, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/anyio/to_thread.py", line 56, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/anyio/_backends/_asyncio.py", line 2470, in run_sync_in_worker_thread
+    return await future
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/anyio/_backends/_asyncio.py", line 967, in run
+    result = context.run(func, *args)
+  File "/Users/steveheydrich/Desktop/代码Codes/热搜聚合与分析/main.py", line 23, in read_root
+    return bilibili()
+  File "/Users/steveheydrich/Desktop/代码Codes/热搜聚合与分析/scrape.py", line 83, in bilibili
+    response = requests.request("GET", url, headers=headers, data=payload)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/requests/adapters.py", line 700, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='app.bilibili.com', port=443): Max retries exceeded with url: /x/v2/search/trending/ranking?limit=30 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x31467b820>: Failed to resolve 'app.bilibili.com' ([Errno 8] nodename nor servname provided, or not known)"))
+INFO:     127.0.0.1:63425 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50296 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54245 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59441 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63233 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50449 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54049 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57292 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60977 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64465 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51383 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55197 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58869 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62482 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49749 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52913 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55962 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58487 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61073 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63206 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65046 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49378 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51550 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54120 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54858 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57604 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58614 - "GET / HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/util/connection.py", line 60, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+  File "/opt/anaconda3/envs/DA/lib/python3.10/socket.py", line 967, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/connectionpool.py", line 488, in _make_request
+    raise new_e
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/connectionpool.py", line 464, in _make_request
+    self._validate_conn(conn)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/connectionpool.py", line 1093, in _validate_conn
+    conn.connect()
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/connection.py", line 704, in connect
+    self.sock = sock = self._new_conn()
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/connection.py", line 205, in _new_conn
+    raise NameResolutionError(self.host, self, e) from e
+urllib3.exceptions.NameResolutionError: <urllib3.connection.HTTPSConnection object at 0x314873cd0>: Failed to resolve 'app.bilibili.com' ([Errno 8] nodename nor servname provided, or not known)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/requests/adapters.py", line 667, in send
+    resp = conn.urlopen(
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/util/retry.py", line 519, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='app.bilibili.com', port=443): Max retries exceeded with url: /x/v2/search/trending/ranking?limit=30 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x314873cd0>: Failed to resolve 'app.bilibili.com' ([Errno 8] nodename nor servname provided, or not known)"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/uvicorn/protocols/http/httptools_impl.py", line 409, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/middleware/errors.py", line 187, in __call__
+    raise exc
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/routing.py", line 714, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/routing.py", line 734, in app
+    await route.handle(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/routing.py", line 73, in app
+    response = await f(request)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/fastapi/routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/fastapi/routing.py", line 214, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/concurrency.py", line 37, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/anyio/to_thread.py", line 56, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/anyio/_backends/_asyncio.py", line 2470, in run_sync_in_worker_thread
+    return await future
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/anyio/_backends/_asyncio.py", line 967, in run
+    result = context.run(func, *args)
+  File "/Users/steveheydrich/Desktop/代码Codes/热搜聚合与分析/main.py", line 23, in read_root
+    return bilibili()
+  File "/Users/steveheydrich/Desktop/代码Codes/热搜聚合与分析/scrape.py", line 83, in bilibili
+    response = requests.request("GET", url, headers=headers, data=payload)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/requests/adapters.py", line 700, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='app.bilibili.com', port=443): Max retries exceeded with url: /x/v2/search/trending/ranking?limit=30 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x314873cd0>: Failed to resolve 'app.bilibili.com' ([Errno 8] nodename nor servname provided, or not known)"))
+INFO:     127.0.0.1:58619 - "GET / HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/util/connection.py", line 60, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+  File "/opt/anaconda3/envs/DA/lib/python3.10/socket.py", line 967, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/connectionpool.py", line 488, in _make_request
+    raise new_e
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/connectionpool.py", line 464, in _make_request
+    self._validate_conn(conn)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/connectionpool.py", line 1093, in _validate_conn
+    conn.connect()
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/connection.py", line 704, in connect
+    self.sock = sock = self._new_conn()
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/connection.py", line 205, in _new_conn
+    raise NameResolutionError(self.host, self, e) from e
+urllib3.exceptions.NameResolutionError: <urllib3.connection.HTTPSConnection object at 0x314871150>: Failed to resolve 'app.bilibili.com' ([Errno 8] nodename nor servname provided, or not known)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/requests/adapters.py", line 667, in send
+    resp = conn.urlopen(
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/urllib3/util/retry.py", line 519, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='app.bilibili.com', port=443): Max retries exceeded with url: /x/v2/search/trending/ranking?limit=30 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x314871150>: Failed to resolve 'app.bilibili.com' ([Errno 8] nodename nor servname provided, or not known)"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/uvicorn/protocols/http/httptools_impl.py", line 409, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/middleware/errors.py", line 187, in __call__
+    raise exc
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/routing.py", line 714, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/routing.py", line 734, in app
+    await route.handle(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/routing.py", line 73, in app
+    response = await f(request)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/fastapi/routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/fastapi/routing.py", line 214, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/starlette/concurrency.py", line 37, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/anyio/to_thread.py", line 56, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/anyio/_backends/_asyncio.py", line 2470, in run_sync_in_worker_thread
+    return await future
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/anyio/_backends/_asyncio.py", line 967, in run
+    result = context.run(func, *args)
+  File "/Users/steveheydrich/Desktop/代码Codes/热搜聚合与分析/main.py", line 23, in read_root
+    return bilibili()
+  File "/Users/steveheydrich/Desktop/代码Codes/热搜聚合与分析/scrape.py", line 83, in bilibili
+    response = requests.request("GET", url, headers=headers, data=payload)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/opt/anaconda3/envs/DA/lib/python3.10/site-packages/requests/adapters.py", line 700, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='app.bilibili.com', port=443): Max retries exceeded with url: /x/v2/search/trending/ranking?limit=30 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x314871150>: Failed to resolve 'app.bilibili.com' ([Errno 8] nodename nor servname provided, or not known)"))
+INFO:     127.0.0.1:58673 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59516 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60010 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60853 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61216 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61940 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62572 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63297 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63826 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64146 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64389 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64672 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65127 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49437 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49955 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50709 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51381 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52085 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53018 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53740 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54444 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54914 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56040 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56379 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56530 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56809 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56981 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58393 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59172 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59565 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59854 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59942 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60146 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60683 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60927 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61152 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61538 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61703 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62763 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63513 - "GET / HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [24660]
+INFO:     Stopping reloader process [24658]
